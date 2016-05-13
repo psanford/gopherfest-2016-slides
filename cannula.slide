@@ -1,0 +1,60 @@
+Process Introspection in Production
+16 May 2016
+
+Muir Manders
+Peter Sanford
+RetailNext
+http://github.com/retailnext/cannula
+
+* About Us
+
+- Members of the Technical Staff at RetailNext
+- Analytics for brick and mortar stores
+- Distributed systems, embedded systems, video processing
+- Using Go in production for three years
+
+* Process Introspection
+
+- Looking inside a process to see what's going on, often for debugging purposes
+
+* Standard Library Tools
+
+- net/http/pprof
+
+.code pprof_init.go
+
+- expvar
+
+.code expvar_init.go
+
+* Demo server
+
+.code fub.go
+
+* Demos
+
+- get current goroutines
+
+- cpu profile
+
+- heap profiling
+
+- expvar
+
+
+* Security Issues
+
+- net/http/pprof and expvar expose their handlers on the default ServeMux
+
+- A shockingly non-negligible number of go servers on the internet have /debug exposed
+
+- RetailNext runs our debug server on a unix socket
+
+- We have a proxy tool that allows us to run `go tool pprof` against it
+
+- This also allows us to define custom debug handlers
+
+
+* Open Source version available!
+
+- https://github.com/retailnext/cannula
