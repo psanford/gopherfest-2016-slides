@@ -12,10 +12,12 @@ http://github.com/retailnext/cannula
 - Analytics for brick and mortar stores
 - Distributed systems, embedded systems, video processing
 - Using Go in production for three years
+- Hiring
 
 * Process Introspection
 
 - Looking inside a process to see what's going on, often for debugging purposes
+- Not arbitrary inspection like with a debugger, but rather using pre-defined debugging hooks to examine or sometimes alter application state
 
 * Standard Library Tools
 
@@ -41,7 +43,6 @@ http://github.com/retailnext/cannula
 
 - expvar
 
-
 * Security Issues
 
 - net/http/pprof and expvar expose their handlers on the default ServeMux
@@ -53,7 +54,6 @@ http://github.com/retailnext/cannula
 - We have a proxy tool that allows us to run `go tool pprof` against it
 
 - This also allows us to define custom debug handlers
-
 
 * Open Source version available!
 
