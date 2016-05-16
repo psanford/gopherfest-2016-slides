@@ -14,6 +14,7 @@ import (
 )
 
 var hits = expvar.NewInt("hits")
+var buf bytes.Buffer
 
 func main() {
 	http.HandleFunc("/fub", fub)
@@ -29,7 +30,9 @@ func main() {
 		fmt.Fprintln(w, "/debug/vars")
 	})
 
-	log.Fatal(http.ListenAndServe(":9999", nil))
+	listen := "127.0.0.1:9999"
+	log.Printf("Listening on %s", listen)
+	log.Fatal(http.ListenAndServe(listen, nil))
 }
 
 func fub(w http.ResponseWriter, r *http.Request) {
@@ -39,12 +42,12 @@ func fub(w http.ResponseWriter, r *http.Request) {
 		now := time.Now()
 		seconds := now.Hour()*3600 + now.Minute()*60 + now.Second()
 
-		var buf bytes.Buffer
-
 		buf.WriteString("seconds so far: ")
 		buf.WriteString(strconv.Itoa(seconds))
 
-		buf.WriteTo(ioutil.Discard)
+		if r.FormValue("leak") == "" {
+			buf.WriteTo(ioutil.Discard)
+		}
 	}
 	w.Write([]byte("fub done\n"))
 }

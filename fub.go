@@ -1,5 +1,7 @@
 var hits = expvar.NewInt("hits")
 
+var buf bytes.Buffer
+
 func main() {
 	http.HandleFunc("/fub", fub)
 
@@ -12,8 +14,6 @@ func fub(w http.ResponseWriter, r *http.Request) {
 	for i := 0; i < 50000000; i++ {
 		now := time.Now()
 		seconds := now.Hour()*3600 + now.Minute()*60 + now.Second()
-
-		var buf bytes.Buffer
 
 		buf.WriteString("seconds so far: ")
 		buf.WriteString(strconv.Itoa(seconds))
