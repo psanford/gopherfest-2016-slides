@@ -47,8 +47,6 @@ http://github.com/retailnext/cannula
 
 - net/http/pprof and expvar expose their handlers on the default ServeMux
 
-- A shockingly non-negligible number of go servers on the internet have /debug exposed
-
 - RetailNext runs our debug server on a unix socket
 
 - We have a proxy tool that allows us to run `go tool pprof` against it
